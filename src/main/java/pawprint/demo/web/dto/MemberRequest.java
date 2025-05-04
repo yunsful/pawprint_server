@@ -12,4 +12,11 @@ public class MemberRequest {
         private String name;
         private String statusNote;
     }
+    
+    @Getter
+    public static class MemberLoginDto {
+        
+        private String userId;
+        private String password;
+    }
 }
