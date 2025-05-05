@@ -21,4 +21,9 @@ public class Member extends BaseEntity {
     private String statusNote;
     private String profile;
     
+    public void update(String statusNote, String name) {
+        this.name = name;
+        this.statusNote = statusNote;
+    }
+    
 }
