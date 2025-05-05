@@ -32,7 +32,7 @@ public class MemberController {
         return ApiResponse.onSuccess(MemberConverter.toMemberIdDto(loginMember));
     }
     
-    @PostMapping("/update")
+    @PatchMapping("/update")
     public ApiResponse<MemberResponse.MemberIdDto> update(
             @RequestBody MemberRequest.MemberUpdateDto updateDto) {
         
@@ -40,5 +40,13 @@ public class MemberController {
         
         return ApiResponse.onSuccess(MemberConverter.toMemberIdDto(updateMember));
         
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse<MemberResponse.MemberIdDto> delete(@RequestParam Long id) {
+        
+        Member deletedMember = memberService.delete(id);
+        
+        return ApiResponse.onSuccess(MemberConverter.toMemberIdDto(deletedMember));
     }
 }

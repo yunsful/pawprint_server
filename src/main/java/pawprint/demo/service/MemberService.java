@@ -10,4 +10,6 @@ public interface MemberService {
     Member login(MemberRequest.MemberLoginDto loginDto);
     
     Member update(MemberRequest.MemberUpdateDto updateDto);
+    
+    Member delete(Long id);
 }

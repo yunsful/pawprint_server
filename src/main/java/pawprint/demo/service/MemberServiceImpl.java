@@ -58,4 +58,21 @@ public class MemberServiceImpl implements MemberService{
         
         return memberRepository.save(findMember);
     }
+    
+    @Override
+    public Member delete(Long id) {
+        
+        Member findMember = memberRepository.findById(id).orElseThrow(
+                () -> new MemberHandler(ErrorStatus.Member_NOT_FOUND)
+        );
+        
+        memberRepository.delete(findMember);
+        memberRepository.flush();
+        
+        memberRepository.findById(id).ifPresent(member -> {
+            throw new MemberHandler(ErrorStatus._INTERNAL_SERVER_ERROR);
+        });
+        
+        return findMember;
+    }
 }
