@@ -2,7 +2,6 @@ package pawprint.demo.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.logging.log4j.util.Lazy;
 import pawprint.demo.domain.base.BaseEntity;
 import pawprint.demo.domain.enums.Gender;
 import pawprint.demo.domain.enums.PetType;

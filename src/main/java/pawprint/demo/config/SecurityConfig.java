@@ -8,11 +8,30 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import pawprint.demo.auth.Handler.JwtAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    
+    private static final String[] AUTH_WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/css/**",
+            "/js/**",
+            "/file/**",
+            "/images/**",
+            "/webjars/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/h2/**"
+    };
     
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -27,10 +46,11 @@ public class SecurityConfig {
                 .csrf(auth -> auth.disable())
                 .formLogin((auth) -> auth.disable())
                 .httpBasic((auth) -> auth.disable())
-                
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("api/users/join").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers("/api/members/join").permitAll()
+                        .anyRequest().permitAll())
                 
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

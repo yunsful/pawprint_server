@@ -3,6 +3,7 @@ package pawprint.demo.web.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pawprint.demo.apiPayload.ApiResponse;
+import pawprint.demo.converter.MemberConverter;
 import pawprint.demo.domain.Member;
 import pawprint.demo.service.MemberService;
 import pawprint.demo.web.dto.MemberRequest;
@@ -20,10 +21,7 @@ public class MemberController {
         
         Member savedMember = memberService.join(joinDto);
         
-        return ApiResponse.onSuccess(
-                MemberResponse.MemberIdDto.builder()
-                        .id(savedMember.getId())
-                        .build());
+        return ApiResponse.onSuccess(MemberConverter.toMemberIdDto(savedMember));
     }
     
     @PostMapping("/login")
@@ -31,9 +29,16 @@ public class MemberController {
         
         Member loginMember = memberService.login(loginDto);
         
-        return ApiResponse.onSuccess(
-                MemberResponse.MemberIdDto.builder()
-                        .id(loginMember.getId())
-                        .build());
+        return ApiResponse.onSuccess(MemberConverter.toMemberIdDto(loginMember));
+    }
+    
+    @PostMapping("/update")
+    public ApiResponse<MemberResponse.MemberIdDto> update(
+            @RequestBody MemberRequest.MemberUpdateDto updateDto) {
+        
+        Member updateMember = memberService.update(updateDto);
+        
+        return ApiResponse.onSuccess(MemberConverter.toMemberIdDto(updateMember));
+        
     }
 }

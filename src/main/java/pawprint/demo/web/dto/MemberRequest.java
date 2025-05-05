@@ -19,4 +19,12 @@ public class MemberRequest {
         private String userId;
         private String password;
     }
+    
+    @Getter
+    public static class MemberUpdateDto {
+        
+        private Long id;
+        private String name;
+        private String statusNote;
+    }
 }

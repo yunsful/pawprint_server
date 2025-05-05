@@ -20,6 +20,7 @@ public enum ErrorStatus implements BaseErrorCode {
     Member_NOT_FOUND(HttpStatus.NOT_FOUND, "USER4001", "유저를 찾을 수 없습니다."),
     Member_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "USER4002", "이미 존재하는 유저입니다."),
     LOGGED_OUT_USER(HttpStatus.NOT_FOUND, "USER4003", "로그아웃한 유저입니다."),
+    NOT_VALID_PASSWORD(HttpStatus.BAD_REQUEST, "USER4004", "비밀번호다 다릅니다."),
 
     // 토큰 관련 에러
     NOT_VALID_TOKEN(HttpStatus.UNAUTHORIZED, "TOKEN4001", "유효하지 않은 토큰입니다."),

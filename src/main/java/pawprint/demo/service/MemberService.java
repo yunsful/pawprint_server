@@ -8,4 +8,6 @@ public interface MemberService {
     Member join(MemberRequest.MemberJoinDto joinDto);
     
     Member login(MemberRequest.MemberLoginDto loginDto);
+    
+    Member update(MemberRequest.MemberUpdateDto updateDto);
 }

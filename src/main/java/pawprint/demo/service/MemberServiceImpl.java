@@ -47,4 +47,15 @@ public class MemberServiceImpl implements MemberService{
         
         return loginMember;
     }
+    
+    @Override
+    public Member update(MemberRequest.MemberUpdateDto updateDto) {
+        Member findMember = memberRepository.findById(updateDto.getId()).orElseThrow(
+                () -> new MemberHandler(ErrorStatus.Member_NOT_FOUND)
+        );
+        
+        findMember.update(updateDto.getStatusNote(), updateDto.getName());
+        
+        return memberRepository.save(findMember);
+    }
 }
