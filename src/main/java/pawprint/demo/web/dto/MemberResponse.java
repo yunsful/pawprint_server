@@ -14,4 +14,17 @@ public class MemberResponse {
         
         private Long id;
     }
+    
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    @Schema(description = "회원 정보 반환 DTO")
+    public static class MemberInfoDto {
+        
+        private String name;
+        private String statusNote;
+        private String profile;
+        
+    }
 }
