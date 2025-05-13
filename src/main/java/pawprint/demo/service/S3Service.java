@@ -36,8 +36,7 @@ public class S3Service {
             metadata.setContentType(file.getContentType());
 
             // S3 업로드 요청 생성
-            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, inputStream, metadata)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, inputStream, metadata));
 
         } catch (IOException e) {
             throw new S3Handler(ErrorStatus.FILE_NOT_UPLOADED);

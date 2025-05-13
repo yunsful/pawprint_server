@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.apiPayload.code.status.ErrorStatus;
 import pawprint.demo.apiPayload.exception.handler.MemberHandler;
 import pawprint.demo.domain.Member;
@@ -17,15 +18,23 @@ public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final S3Service s3Service;
     
     @Override
-    public Member join(MemberRequest.MemberJoinDto joinDto) {
+    public Member join(MultipartFile profileImage, MemberRequest.MemberJoinDto joinDto) {
         
         if (memberRepository.existsByUserId(joinDto.getUserId())) {
             throw new MemberHandler(ErrorStatus.Member_ALREADY_EXIST);
         }
         
+        String imageAddress = null;
+        
+        if (profileImage != null) {
+            imageAddress = s3Service.uploadFile(profileImage);
+        }
+        
         Member newMember = Member.builder()
+                .profile(imageAddress)
                 .userId(joinDto.getUserId())
                 .password(bCryptPasswordEncoder.encode(joinDto.getPassword()))
                 .name(joinDto.getName())
@@ -65,7 +74,7 @@ public class MemberServiceImpl implements MemberService{
         Member findMember = memberRepository.findById(id).orElseThrow(
                 () -> new MemberHandler(ErrorStatus.Member_NOT_FOUND)
         );
-        
+        s3Service.deleteImageFromS3(findMember.getProfile());
         memberRepository.delete(findMember);
         memberRepository.flush();
         
