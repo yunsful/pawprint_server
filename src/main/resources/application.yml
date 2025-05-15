@@ -24,8 +24,19 @@ spring:
         use_sql_comments: true
         default_batch_fetch_size: 1000
         generate_statistics: true
-      javax:
-        persistence:
-          sharedCache:
-          mode: ENABLE_SELECTIVE
+  cloud:
+    aws:
+      s3:
+        bucketName: pawprint.s3
+      credentials:
+        accessKey: ${S3_ACCESSKEY}
+        secretKey: ${S3_PASSWORD}
+      region:
+        static: ap-northeast-2
+        auto: false
+      stack:
+        auto: false
 
+
+      #  jwt:
+      #    secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb

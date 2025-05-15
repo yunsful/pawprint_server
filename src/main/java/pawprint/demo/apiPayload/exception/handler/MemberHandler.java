@@ -3,9 +3,9 @@ package pawprint.demo.apiPayload.exception.handler;
 import pawprint.demo.apiPayload.BaseErrorCode;
 import pawprint.demo.apiPayload.exception.GeneralException;
 
-public class UserHandler extends GeneralException {
+public class MemberHandler extends GeneralException {
     
-    public UserHandler(BaseErrorCode errorCode) {
+    public MemberHandler(BaseErrorCode errorCode) {
         super(errorCode);
     }
 }
