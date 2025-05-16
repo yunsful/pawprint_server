@@ -1,11 +1,10 @@
 package pawprint.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import pawprint.demo.domain.base.BaseEntity;
+
+import java.time.LocalDate;
 
 @Entity
 @Builder
@@ -19,4 +18,15 @@ public class Memory extends BaseEntity {
     private Long id;
     
     private String body;
+    private LocalDate date;
+    private Integer count;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
+    
 }

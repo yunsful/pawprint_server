@@ -15,7 +15,7 @@ import pawprint.demo.domain.base.BaseEntity;
 public class Tag extends BaseEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String name;
