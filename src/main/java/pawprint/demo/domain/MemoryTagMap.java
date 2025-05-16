@@ -14,7 +14,7 @@ import static jakarta.persistence.FetchType.*;
 public class MemoryTagMap extends BaseEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne(fetch = LAZY)

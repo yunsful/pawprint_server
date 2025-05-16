@@ -19,7 +19,6 @@ public class Mission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private LocalDate date;
     private String title;
     private String description;
     private Boolean isDone;
@@ -29,4 +28,9 @@ public class Mission extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
     
+    public void update(String title, String description, Boolean isDone) {
+        this.title = title;
+        this.description = description;
+        this.isDone = isDone;
+    }
 }
