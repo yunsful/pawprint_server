@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import pawprint.demo.domain.base.BaseEntity;
 
+import java.time.LocalDate;
+
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -17,8 +19,10 @@ public class Mission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    private LocalDate date;
     private String title;
     private String description;
+    private Boolean isDone;
     private Integer order;
     
     @ManyToOne(fetch = LAZY)
