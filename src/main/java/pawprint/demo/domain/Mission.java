@@ -19,10 +19,16 @@ public class Mission extends BaseEntity {
     
     private String title;
     private String description;
-    private Integer order;
+    private Boolean isDone;
+    private Integer missionOrder;
     
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
     
+    public void update(String title, String description, Boolean isDone) {
+        this.title = title;
+        this.description = description;
+        this.isDone = isDone;
+    }
 }
