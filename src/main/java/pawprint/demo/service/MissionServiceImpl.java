@@ -82,7 +82,7 @@ public class MissionServiceImpl implements MissionService {
     }
     
     @Override
-    public void completeMission(MissionRequest.MissionCompleteDto request, List<MultipartFile> images) {
+    public Memory completeMission(MissionRequest.MissionCompleteDto request, List<MultipartFile> images) {
         
         Mission findMission = missionRepository.findById(request.getMissionId()).orElseThrow(
                 () -> new MissionHandler(ErrorStatus.Mission_NOT_FOUND)
@@ -96,12 +96,13 @@ public class MissionServiceImpl implements MissionService {
         Memory memory = Memory.builder()
                 .body(request.getBody())
                 .date(request.getDate())
+                .count(memoryRepository.countAllByMember_Id(request.getMemberId()) + 1)
                 .mission(findMission)
                 .member(findMember)
                 .build();
         
         memoryRepository.save(memory);
-        
+        memoryRepository.flush();
         for (MultipartFile image : images) {
             String imageAddress = s3Service.uploadFile(image);
             Media media = Media.builder()
@@ -110,5 +111,7 @@ public class MissionServiceImpl implements MissionService {
                     .build();
             mediaRepository.save(media);
         }
+        
+        return memory;
     }
 }

@@ -19,6 +19,7 @@ public class Memory extends BaseEntity {
     
     private String body;
     private LocalDate date;
+    private Integer count;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

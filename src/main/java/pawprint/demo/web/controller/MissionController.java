@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.apiPayload.ApiResponse;
 import pawprint.demo.converter.MissionConverter;
+import pawprint.demo.domain.Memory;
 import pawprint.demo.domain.Mission;
 import pawprint.demo.service.MissionService;
+import pawprint.demo.web.dto.MemoryResponse;
 import pawprint.demo.web.dto.MissionRequest;
 import pawprint.demo.web.dto.MissionResponse;
 
@@ -71,12 +73,13 @@ public class MissionController {
     }
     
     @PostMapping("/complete")
-    public ApiResponse<MissionResponse.MissionIdDto> completeMission(
+    @Operation(summary = "미션 완료", description = "미션을 완료시키고 입력값을 받아 추억을 생성합니다.")
+    public ApiResponse<MemoryResponse.MemoryIdDto> completeMission(
             @RequestPart MissionRequest.MissionCompleteDto request,
             @RequestPart List<MultipartFile> images
     ) {
-        missionService.completeMission(request, images);
+        Memory memory = missionService.completeMission(request, images);
         
-        return ApiResponse.onSuccess(MissionResponse.MissionIdDto.builder().id(request.getMissionId()).build());
+        return ApiResponse.onSuccess(MemoryResponse.MemoryIdDto.builder().id(memory.getId()).build());
     }
 }

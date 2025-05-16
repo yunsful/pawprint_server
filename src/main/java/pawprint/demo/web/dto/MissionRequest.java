@@ -31,9 +31,14 @@ public class MissionRequest {
     
     @Getter
     public static class MissionCompleteDto {
+        
+        @Schema(description = "미션 id")
         private Long missionId;
+        @Schema(description = "회원 id")
         private Long memberId;
+        @Schema(description = "미션 내용")
         private String body;
+        @Schema(description = "완료 날짜")
         private LocalDate date;
     }
     

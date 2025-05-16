@@ -1,6 +1,7 @@
 package pawprint.demo.service;
 
 import org.springframework.web.multipart.MultipartFile;
+import pawprint.demo.domain.Memory;
 import pawprint.demo.domain.Mission;
 import pawprint.demo.web.dto.MissionRequest;
 
@@ -16,5 +17,5 @@ public interface MissionService {
     
     Mission getMission(Long id);
     
-    void completeMission(MissionRequest.MissionCompleteDto request, List<MultipartFile> images);
+    Memory completeMission(MissionRequest.MissionCompleteDto request, List<MultipartFile> images);
 }
