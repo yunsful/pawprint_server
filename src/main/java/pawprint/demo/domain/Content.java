@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import pawprint.demo.domain.base.BaseEntity;
 
+import java.util.List;
+
 import static jakarta.persistence.FetchType.*;
 
 @Entity

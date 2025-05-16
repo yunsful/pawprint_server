@@ -17,7 +17,6 @@ public class Media extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String filename;
     private String filePath;
     
     @ManyToOne(fetch = LAZY)
@@ -28,5 +27,6 @@ public class Media extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "memory_id")
     private Memory memory;
+    
     
 }
