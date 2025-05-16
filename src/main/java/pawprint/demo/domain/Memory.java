@@ -20,6 +20,10 @@ public class Memory extends BaseEntity {
     private String body;
     private LocalDate date;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;

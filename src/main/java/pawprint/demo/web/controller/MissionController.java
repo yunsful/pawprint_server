@@ -7,12 +7,15 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.apiPayload.ApiResponse;
 import pawprint.demo.converter.MissionConverter;
 import pawprint.demo.domain.Mission;
 import pawprint.demo.service.MissionService;
 import pawprint.demo.web.dto.MissionRequest;
 import pawprint.demo.web.dto.MissionResponse;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -65,5 +68,15 @@ public class MissionController {
         Mission mission = missionService.getMission(id);
         
         return ApiResponse.onSuccess(MissionConverter.toMissionInfoDto(mission));
+    }
+    
+    @PostMapping("/complete")
+    public ApiResponse<MissionResponse.MissionIdDto> completeMission(
+            @RequestPart MissionRequest.MissionCompleteDto request,
+            @RequestPart List<MultipartFile> images
+    ) {
+        missionService.completeMission(request, images);
+        
+        return ApiResponse.onSuccess(MissionResponse.MissionIdDto.builder().id(request.getMissionId()).build());
     }
 }

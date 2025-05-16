@@ -1,7 +1,10 @@
 package pawprint.demo.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.domain.Mission;
 import pawprint.demo.web.dto.MissionRequest;
+
+import java.util.List;
 
 public interface MissionService {
     
@@ -12,4 +15,6 @@ public interface MissionService {
     Mission updateMission(MissionRequest.MissionUpdateDto updateDto);
     
     Mission getMission(Long id);
+    
+    void completeMission(MissionRequest.MissionCompleteDto request, List<MultipartFile> images);
 }
