@@ -3,6 +3,8 @@ package pawprint.demo.service.memory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pawprint.demo.apiPayload.code.status.ErrorStatus;
+import pawprint.demo.apiPayload.exception.handler.MemoryHandler;
 import pawprint.demo.domain.Media;
 import pawprint.demo.domain.Memory;
 import pawprint.demo.repository.MediaRepository;
@@ -20,7 +22,15 @@ public class MemoryServiceImpl implements MemoryService{
     private final MediaRepository mediaRepository;
     
     @Override
-    public List<MemoryResponse.MemoryInfoDto> getMemoriesWithMediaByMemberId(Long memberId) {
+    public Memory getMemoryById(Long id) {
+        
+        return memoryRepository.findById(id).orElseThrow(
+                () -> new MemoryHandler(ErrorStatus.MEMORY_NOT_FOUND)
+        );
+    }
+    
+    @Override
+    public List<MemoryResponse.ListMemoryInfoDto> getMemoriesWithMediaByMemberId(Long memberId) {
         
         List<Memory> memories = memoryRepository.findAllByMember_Id(memberId);
         
@@ -30,7 +40,7 @@ public class MemoryServiceImpl implements MemoryService{
                             .map(Media::getFilePath)
                             .orElse(null);
                     
-                    return MemoryResponse.MemoryInfoDto.builder()
+                    return MemoryResponse.ListMemoryInfoDto.builder()
                             .id(memory.getId())
                             .body(memory.getBody())
                             .date(memory.getDate().toString())

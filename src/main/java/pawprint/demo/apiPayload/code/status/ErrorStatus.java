@@ -39,8 +39,9 @@ public enum ErrorStatus implements BaseErrorCode {
     IO_EXCEPTION_ON_IMAGE_DELETE(HttpStatus.BAD_REQUEST, "S34004", "삭제 중 에러가 발생했습니다."),
     INVALID_URL(HttpStatus.BAD_REQUEST, "S34005", "유효하지 않은 url입니다."),
     
-    Mission_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "미션을 찾을 수 없습니다."),
+    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "미션을 찾을 수 없습니다."),
     
+    MEMORY_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMORY4001", "추억을 찾을 수 없습니다.")
     
     ;
 
