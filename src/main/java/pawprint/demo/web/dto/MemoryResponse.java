@@ -14,4 +14,12 @@ public class MemoryResponse {
         
         private Long id;
     }
+    
+    public static class MemoryInfoDto {
+        private Long id;
+        private String body;
+        private String date;
+        private Integer count;
+        private String profile;
+    }
 }
