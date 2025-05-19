@@ -1,4 +1,4 @@
-package pawprint.demo.service;
+package pawprint.demo.service.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +9,7 @@ import pawprint.demo.apiPayload.code.status.ErrorStatus;
 import pawprint.demo.apiPayload.exception.handler.MemberHandler;
 import pawprint.demo.domain.Member;
 import pawprint.demo.repository.MemberRepository;
+import pawprint.demo.service.S3Service;
 import pawprint.demo.web.dto.MemberRequest;
 
 @Service

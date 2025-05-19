@@ -1,4 +1,4 @@
-package pawprint.demo.service;
+package pawprint.demo.service.mission;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import pawprint.demo.repository.MediaRepository;
 import pawprint.demo.repository.MemberRepository;
 import pawprint.demo.repository.MemoryRepository;
 import pawprint.demo.repository.MissionRepository;
+import pawprint.demo.service.S3Service;
 import pawprint.demo.web.dto.MissionRequest;
 
 import java.util.List;

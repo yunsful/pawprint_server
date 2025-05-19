@@ -15,11 +15,16 @@ public class MemoryResponse {
         private Long id;
     }
     
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    @Schema(description = "추억 정보 반환 DTO")
     public static class MemoryInfoDto {
         private Long id;
         private String body;
         private String date;
         private Integer count;
-        private String profile;
+        private String media;
     }
 }

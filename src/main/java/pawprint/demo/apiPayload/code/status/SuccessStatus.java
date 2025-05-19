@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum SuccessStatus implements BaseCode {
     
-    _OK(HttpStatus.OK, "COMMON200", "성공입니다.");
+    _OK(HttpStatus.OK, "COMMON200", "성공입니다."),
+    MISSION_COMPLETE(HttpStatus.OK, "MISSION201", "미션 완료 처리 후 생성된 추억 id를 반환합니다.")
+    ;
     
     private final HttpStatus httpStatus;
     private final String code;

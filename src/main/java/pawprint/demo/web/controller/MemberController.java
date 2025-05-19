@@ -2,8 +2,6 @@ package pawprint.demo.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.apiPayload.ApiResponse;
 import pawprint.demo.converter.MemberConverter;
 import pawprint.demo.domain.Member;
-import pawprint.demo.service.MemberService;
+import pawprint.demo.service.member.MemberService;
 import pawprint.demo.web.dto.MemberRequest;
 import pawprint.demo.web.dto.MemberResponse;
-
-import java.awt.*;
 
 @RestController
 @RequiredArgsConstructor
