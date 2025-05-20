@@ -3,17 +3,17 @@ package pawprint.demo.web.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.apiPayload.ApiResponse;
+import pawprint.demo.apiPayload.code.status.SuccessStatus;
 import pawprint.demo.converter.MissionConverter;
 import pawprint.demo.domain.Memory;
 import pawprint.demo.domain.Mission;
-import pawprint.demo.service.MissionService;
+import pawprint.demo.service.mission.MissionService;
 import pawprint.demo.web.dto.MemoryResponse;
 import pawprint.demo.web.dto.MissionRequest;
 import pawprint.demo.web.dto.MissionResponse;
@@ -81,6 +81,6 @@ public class MissionController {
     ) {
         Memory memory = missionService.completeMission(request, images);
         
-        return ApiResponse.onSuccess(MemoryResponse.MemoryIdDto.builder().id(memory.getId()).build());
+        return ApiResponse.of(SuccessStatus.MISSION_COMPLETE, MemoryResponse.MemoryIdDto.builder().id(memory.getId()).build());
     }
 }

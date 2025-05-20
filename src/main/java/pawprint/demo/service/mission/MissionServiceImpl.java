@@ -1,4 +1,4 @@
-package pawprint.demo.service;
+package pawprint.demo.service.mission;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import pawprint.demo.repository.MediaRepository;
 import pawprint.demo.repository.MemberRepository;
 import pawprint.demo.repository.MemoryRepository;
 import pawprint.demo.repository.MissionRepository;
+import pawprint.demo.service.S3Service;
 import pawprint.demo.web.dto.MissionRequest;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class MissionServiceImpl implements MissionService {
     public void deleteMission(Long id) {
         
         Mission findMission = missionRepository.findById(id).orElseThrow(
-                () -> new MissionHandler(ErrorStatus.Mission_NOT_FOUND)
+                () -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)
         );
         
         missionRepository.delete(findMission);
@@ -67,7 +68,7 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public Mission updateMission(MissionRequest.MissionUpdateDto updateDto) {
         Mission findMission = missionRepository.findById(updateDto.getId()).orElseThrow(
-                () -> new MissionHandler(ErrorStatus.Mission_NOT_FOUND)
+                () -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)
         );
         
         findMission.update(updateDto.getTitle(), updateDto.getDescription(), findMission.getIsDone());
@@ -77,7 +78,7 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public Mission getMission(Long id) {
         return missionRepository.findById(id).orElseThrow(
-                () -> new MissionHandler(ErrorStatus.Mission_NOT_FOUND)
+                () -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)
         );
     }
     
@@ -85,7 +86,7 @@ public class MissionServiceImpl implements MissionService {
     public Memory completeMission(MissionRequest.MissionCompleteDto request, List<MultipartFile> images) {
         
         Mission findMission = missionRepository.findById(request.getMissionId()).orElseThrow(
-                () -> new MissionHandler(ErrorStatus.Mission_NOT_FOUND)
+                () -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND)
         );
         findMission.update(findMission.getTitle(), findMission.getDescription(), true);
         

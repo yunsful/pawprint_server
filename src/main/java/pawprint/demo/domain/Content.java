@@ -26,4 +26,8 @@ public class Content extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+    
+    public void update(String body) {
+        this.body = body;
+    }
 }

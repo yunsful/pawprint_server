@@ -1,4 +1,4 @@
-package pawprint.demo.service;
+package pawprint.demo.service.mission;
 
 import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.domain.Memory;
