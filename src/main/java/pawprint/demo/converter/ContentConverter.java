@@ -18,6 +18,7 @@ public class ContentConverter {
                 .images(images)
                 .commentsCount(content.getCommentsCount())
                 .likesCount(content.getLikesCount())
+                .createdAt(content.getCreatedAt())
                 .build();
     }
     

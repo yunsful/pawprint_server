@@ -3,6 +3,7 @@ package pawprint.demo.web.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ContentResponse {
@@ -26,6 +27,7 @@ public class ContentResponse {
         private Long contentId;
         private List<String> images;
         private String body;
+        private LocalDateTime createdAt;
         private Integer likesCount;
         private Integer commentsCount;
     }
