@@ -16,6 +16,10 @@ public class MediaService {
     private final MediaRepository mediaRepository;
     
     public List<Media> getMediaByMemoryId(Long memoryId) {
-        return mediaRepository.findAllByMemory_Id(memoryId).isEmpty() ? null : mediaRepository.findAllByMemory_Id(memoryId);
+        return mediaRepository.findAllByMemory_Id(memoryId).isEmpty() ? List.of() : mediaRepository.findAllByMemory_Id(memoryId);
+    }
+    
+    public List<Media> getMediaByContentId(Long contentId) {
+        return mediaRepository.findAllByContent_Id(contentId).isEmpty() ? List.of() : mediaRepository.findAllByContent_Id(contentId);
     }
 }
