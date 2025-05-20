@@ -85,4 +85,11 @@ public class MemberServiceImpl implements MemberService{
         
         return findMember;
     }
+    
+    @Override
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElseThrow(
+                () -> new MemberHandler(ErrorStatus.Member_NOT_FOUND)
+        );
+    }
 }

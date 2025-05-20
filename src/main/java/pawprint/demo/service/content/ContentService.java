@@ -15,4 +15,6 @@ public interface ContentService {
     Content getById(Long id);
     
     void deleteById(Long id);
+    
+    List<Content> getAllByMemberId(Long memberId);
 }

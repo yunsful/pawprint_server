@@ -125,4 +125,11 @@ public class ContentServiceImpl implements ContentService {
             throw new ContentHandler(ErrorStatus._INTERNAL_SERVER_ERROR);
         });
     }
+    
+    @Override
+    public List<Content> getAllByMemberId(Long memberId) {
+        
+        return contentRepository.findByMember_Id(memberId)
+                .isEmpty() ? List.of() : contentRepository.findByMember_Id(memberId);
+    }
 }

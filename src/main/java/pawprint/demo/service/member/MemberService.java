@@ -13,4 +13,6 @@ public interface MemberService {
     Member update(MemberRequest.MemberUpdateDto updateDto);
     
     Member delete(Long id);
+    
+    Member findById(Long id);
 }

@@ -29,4 +29,17 @@ public class ContentResponse {
         private Integer likesCount;
         private Integer commentsCount;
     }
+    
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    @Schema(description = "마이페이지 게시물 리스트 반환 DTO")
+    public static class ContentListInfoDto {
+        private String name;
+        private String profile;
+        private String statusNote;
+        private List<ContentInfoDto> contents;
+    }
+    
 }
