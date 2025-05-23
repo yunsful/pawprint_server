@@ -31,7 +31,7 @@ spring:
   cloud:
     aws:
       s3:
-        bucketName: pawprint.s3
+        bucketName: pawprints3
       credentials:
         accessKey: ${S3_ACCESSKEY}
         secretKey: ${S3_PASSWORD}

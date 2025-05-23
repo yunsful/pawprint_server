@@ -28,4 +28,18 @@ public class Plan extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+    
+    public void update(String title, LocalDate date, LocalTime time) {
+        this.title = title;
+        this.date = date;
+        this.time = time;
+    }
+    
+    public void check() {
+        if (!(this.isChecked == null)) {
+            this.isChecked = !this.isChecked;
+        } else {
+            this.isChecked = true;
+        }
+    }
 }

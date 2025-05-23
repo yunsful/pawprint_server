@@ -43,7 +43,9 @@ public enum ErrorStatus implements BaseErrorCode {
     
     MEMORY_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMORY4001", "추억을 찾을 수 없습니다."),
     
-    CONTENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTENT4001", "게시글을 찾을 수 없습니다.")
+    CONTENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTENT4001", "게시글을 찾을 수 없습니다."),
+    
+    PLAN_NOT_FOUND(HttpStatus.NOT_FOUND, "PLAN4001", "일정을 찾을 수 없습니다.")
     
     ;
 
