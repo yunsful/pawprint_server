@@ -8,7 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 import pawprint.demo.apiPayload.code.status.ErrorStatus;
 import pawprint.demo.apiPayload.exception.handler.MemberHandler;
 import pawprint.demo.domain.Member;
+import pawprint.demo.domain.Pet;
+import pawprint.demo.domain.enums.Gender;
 import pawprint.demo.repository.MemberRepository;
+import pawprint.demo.repository.PetRepository;
 import pawprint.demo.service.S3Service;
 import pawprint.demo.web.dto.MemberRequest;
 
@@ -20,6 +23,7 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final S3Service s3Service;
+    private final PetRepository petRepository;
     
     @Override
     public Member join(MultipartFile profileImage, MemberRequest.MemberJoinDto joinDto) {
@@ -41,8 +45,18 @@ public class MemberServiceImpl implements MemberService{
                 .name(joinDto.getName())
                 .statusNote(joinDto.getStatusNote())
                 .build();
+        Member savedMember = memberRepository.save(newMember);
+        memberRepository.flush();
         
-        return memberRepository.save(newMember);
+        Pet newPet = Pet.builder()
+                .birthDate(joinDto.getPBirthday())
+                .member(newMember)
+                .gender(Gender.valueOf(joinDto.getPGender()))
+                .name(joinDto.getPetName())
+                .build();
+        petRepository.save(newPet);
+        
+        return savedMember;
     }
     
     @Override

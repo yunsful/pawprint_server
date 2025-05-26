@@ -3,6 +3,8 @@ package pawprint.demo.web.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 public class MemberRequest {
     
     @Getter
@@ -16,6 +18,12 @@ public class MemberRequest {
         private String name;
         @Schema(description = "상태 메세지")
         private String statusNote;
+        @Schema(description = "반려동물 이름")
+        private String petName;
+        @Schema(description = "반려동물 생년월일")
+        private LocalDate pBirthday;
+        @Schema(description = "반려동물 성별(MALE, FEMALE)")
+        private String pGender;
     }
     
     @Getter
