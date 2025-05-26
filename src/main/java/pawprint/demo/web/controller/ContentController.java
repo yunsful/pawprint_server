@@ -101,4 +101,13 @@ public class ContentController {
                 .build());
                 
     }
+    
+    @GetMapping()
+    @Operation(summary = "커뮤니티 게시글 조회", description = "커뮤니티의 모든 게시글 정보를 조회합니다.")
+    public ApiResponse<ContentResponse.CommunityContentListInfoDto> getCommunityContent() {
+        
+        ContentResponse.CommunityContentListInfoDto result = contentService.getAll();
+        
+        return ApiResponse.onSuccess(result);
+    }
 }

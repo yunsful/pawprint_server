@@ -15,8 +15,10 @@ import pawprint.demo.repository.MediaRepository;
 import pawprint.demo.repository.MemberRepository;
 import pawprint.demo.service.S3Service;
 import pawprint.demo.web.dto.ContentRequest;
+import pawprint.demo.web.dto.ContentResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -132,4 +134,36 @@ public class ContentServiceImpl implements ContentService {
         return contentRepository.findByMember_Id(memberId)
                 .isEmpty() ? List.of() : contentRepository.findByMember_Id(memberId);
     }
+    
+    @Override
+    public ContentResponse.CommunityContentListInfoDto getAll() {
+        
+        List<Content> all = contentRepository.findAll();
+        
+        List<ContentResponse.CommunityContentInfoDto> dtoList = all.stream()
+                .map(content -> {
+                    Member member = content.getMember();
+                    List<String> images = mediaRepository.findAllByContent(content).stream()
+                            .map(Media::getFilePath)
+                            .collect(Collectors.toList());
+                    
+                    return ContentResponse.CommunityContentInfoDto.builder()
+                            .memberId(member.getId())
+                            .name(member.getName())
+                            .profile(member.getProfile())
+                            .contentId(content.getId())
+                            .images(images)
+                            .body(content.getBody())
+                            .createdAt(content.getCreatedAt())
+                            .likesCount(content.getLikesCount())
+                            .commentsCount(content.getCommentsCount())
+                            .build();
+                })
+                .toList();
+        
+        return ContentResponse.CommunityContentListInfoDto.builder()
+                .contents(dtoList)
+                .build();
+    }
+    
 }
