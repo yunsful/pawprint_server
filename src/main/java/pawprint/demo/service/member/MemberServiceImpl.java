@@ -1,6 +1,7 @@
 package pawprint.demo.service.member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import pawprint.demo.repository.PetRepository;
 import pawprint.demo.service.S3Service;
 import pawprint.demo.web.dto.MemberRequest;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -47,11 +49,11 @@ public class MemberServiceImpl implements MemberService{
                 .build();
         Member savedMember = memberRepository.save(newMember);
         memberRepository.flush();
-        
+        log.info("petGender: {}", joinDto.getPetGender());
         Pet newPet = Pet.builder()
-                .birthDate(joinDto.getPBirthday())
+                .birthDate(joinDto.getPetBirthday())
                 .member(newMember)
-                .gender(Gender.valueOf(joinDto.getPGender()))
+                .gender(Gender.valueOf(joinDto.getPetGender()))
                 .name(joinDto.getPetName())
                 .build();
         petRepository.save(newPet);

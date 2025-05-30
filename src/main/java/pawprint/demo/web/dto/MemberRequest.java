@@ -2,6 +2,7 @@ package pawprint.demo.web.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -21,9 +22,9 @@ public class MemberRequest {
         @Schema(description = "반려동물 이름")
         private String petName;
         @Schema(description = "반려동물 생년월일")
-        private LocalDate pBirthday;
+        private LocalDate petBirthday;
         @Schema(description = "반려동물 성별(MALE, FEMALE)")
-        private String pGender;
+        private String petGender;
     }
     
     @Getter
