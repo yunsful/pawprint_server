@@ -3,7 +3,6 @@ package pawprint.demo.web.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,13 @@ public class PlanController {
             @PathVariable Long id
     ) {
         Plan findPlan = planService.getPlanById(id);
-        return ApiResponse.onSuccess(PlanResponse.PlanInfoDto.builder().id(findPlan.getId()).build());
+        return ApiResponse.onSuccess(PlanResponse.PlanInfoDto.builder()
+                .id(findPlan.getId())
+                .time(findPlan.getTime())
+                .title(findPlan.getTitle())
+                .date(findPlan.getDate())
+                .isChecked(findPlan.getIsChecked())
+                .build());
     }
     
     @PatchMapping
@@ -65,11 +70,11 @@ public class PlanController {
         return ApiResponse.onSuccess(PlanResponse.PlanIdDto.builder().id(id).build());
     }
     
-    @GetMapping("/List")
+    @PostMapping("/list")
     @Operation(summary = "일정 리스트 조회", description = "해당 날짜의 일정들을 조회합니다.")
     public ApiResponse<PlanResponse.PlanInfoListDto> listPlans(
             @Parameter(description = "회원 id와 날짜를 입력하세요")
-            @RequestBody PlanRequest.GetPlansByDateDto request
+            @RequestBody PlanRequest.PlanListByDateDTO request
     ) {
         List<Plan> planList = planService.getAllPlansByMemberIdAndDate(request);
         return ApiResponse.onSuccess(PlanConverter.toPlanInfoListDto(planList));

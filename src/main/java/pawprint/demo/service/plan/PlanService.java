@@ -15,7 +15,7 @@ public interface PlanService {
     
     void deletePlan(Long id);
     
-    List<Plan> getAllPlansByMemberIdAndDate(PlanRequest.GetPlansByDateDto request);
+    List<Plan> getAllPlansByMemberIdAndDate(PlanRequest.PlanListByDateDTO request);
     
     void toggleCheck(Long id);
 }

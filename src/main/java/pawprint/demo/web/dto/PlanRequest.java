@@ -1,7 +1,9 @@
 package pawprint.demo.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,11 +39,13 @@ public class PlanRequest {
     }
     
     @Getter
-    public static class GetPlansByDateDto {
+    @NoArgsConstructor
+    public static class PlanListByDateDTO {
         
         @Schema(description = "회원식별 id")
         private Long memberId;
         @Schema(description = "일정 날짜")
+        @JsonFormat(pattern = "yyyy-MM-dd") // Jackson이 LocalDate를 파싱할 수 있도록 명시
         private LocalDate date;
     }
 }

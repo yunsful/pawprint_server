@@ -77,7 +77,7 @@ public class PlanServiceImpl implements PlanService {
     }
     
     @Override
-    public List<Plan> getAllPlansByMemberIdAndDate(PlanRequest.GetPlansByDateDto request) {
+    public List<Plan> getAllPlansByMemberIdAndDate(PlanRequest.PlanListByDateDTO request) {
         
         return planRepository.getPlansByMember_IdAndDate(request.getMemberId(), request.getDate())
                 .isEmpty() ? List.of() : planRepository.getPlansByMember_IdAndDate(request.getMemberId(), request.getDate());
