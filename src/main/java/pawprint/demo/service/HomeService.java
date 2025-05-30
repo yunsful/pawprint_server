@@ -16,6 +16,7 @@ import pawprint.demo.service.memory.MemoryService;
 import pawprint.demo.web.dto.HomeResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,13 +34,13 @@ public class HomeService {
                 () -> new MemberHandler(ErrorStatus.Member_NOT_FOUND)
         );
         
-        List<Pet> findFirstPet = petRepository.findFirstByMember(findMember).isEmpty() ? List.of() : petRepository.findFirstByMember(findMember);
-        
         Integer memoryCount = memoryRepository.countAllByMember_Id(memberId);
+        
+        Optional<Pet> optionalPet = petRepository.findFirstByMember(findMember);
         
         return HomeResponse.HomeBannerDto.builder()
                 .name(findMember.getName())
-                .pName(findFirstPet.get(0).getName())
+                .pName(optionalPet.map(Pet::getName).orElse(null))
                 .memoryCount(memoryCount)
                 .build();
     }
