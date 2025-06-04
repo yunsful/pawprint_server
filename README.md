@@ -11,4 +11,4 @@
 - DB : Mysql, AWS - RDS
 
 ## 아키텍처
-![img.png](img.png)
+<img width="583" alt="스크린샷 2025-06-04 오후 8 36 28" src="https://github.com/user-attachments/assets/e96d1a34-f0ac-40ff-a513-da6120ab7bfc" />
